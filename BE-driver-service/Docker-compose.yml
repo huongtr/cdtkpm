@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3002:5000" ##  map port 3000 on host machine to port 5000 in the Docker container.
+    environment:
+      DB_URL: "postgresql://postgres:secret123@postgres:5432/uber_driver"
+    depends_on:
+      - postgres
+    volumes:
+      - postgres2_data:/var/lib/postgresql/data
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: uber_driver
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret123
+    volumes:
+      - postgres2_data:/var/lib/postgresql/data
+
+volumes:
+  postgres2_data:

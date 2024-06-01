@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+    <title>{{ title }} - Microblog</title>
+    <script type="module">
+        import { io } from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
+      
+        var socket = io('ws://localhost:5000');
+        socket.on('connected', function(data) {
+            console.log(data);
+            socket.emit('add_session', { 'driver_id': 1} )
+        })
+
+        socket.on('ride_requested', function(data) {
+            console.log("ride")
+            alert('a ride is waiting for you');
+        })
+
+        document.getElementById('update_location').addEventListener('click', function(event) {
+            console.log("UPDATE LOCATION");
+            event.preventDefault();
+
+            socket.emit('update_location', { 'driver_id': 1, 'longitude': -122.3351, 'latitude': 47.6086} )
+        })
+
+        document.getElementById('get_location').addEventListener('click', function(event) {
+            console.log("GET LOCATION");
+            event.preventDefault();
+
+            socket.emit('get_nearby_locations', {'location': {'longitude': -122.3351, 'latitude': 47.6086}})
+        })
+
+        document.getElementById('disconnect').addEventListener('click', function(event) {
+            console.log("Disconnect");
+            event.preventDefault();
+
+            socket.emit('disconnect')
+        })
+    </script>
+</head>
+<body>
+    <h1>Hello, {{ driver.username }}!</h1>
+    <div>
+        <button id="update_location">update location</button>
+        <button id="disconnect">disconnect</button>
+        <button id="get_location">get location</button>
+    </div>
+</body>
+</html>

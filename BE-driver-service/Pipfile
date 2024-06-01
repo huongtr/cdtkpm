@@ -1,0 +1,30 @@
+# To manage your project's dependencies more efficiently and ensure consistency across different environments
+# 1. Create new Python virtual environment 'pipenv --python 3.9'
+# 2. Add Dependencies to pipfile
+# 3. Install dependencies 'pipenv install'
+
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+psycopg2-binary = "*"
+sqlalchemy = "*"
+marshmallow = "*"
+flask-migrate = "*"
+python-dotenv = "*"
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
+pyjwt = "*"
+importlib-metadata="*"
+redis = "*"
+flask-socketio = "==5.3.2"
+grpcio = "*"
+grpcio-tools = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
