@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3001:5000"
+    environment:
+      DB_URL: "postgresql://postgres:secret123@postgres:5432/uber_rides"
+      REDIS_HOST: "redis"  # Specify the hostname of the Redis service
+      REDIS_PORT: "6379"   # Default Redis port
+      REDIS_DB: "0"        # Default Redis database
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - postgres1_data:/var/lib/postgresql/data
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: uber_rides
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret123
+    volumes:
+      - postgres1_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:latest
+
+volumes:
+  postgres1_data:
