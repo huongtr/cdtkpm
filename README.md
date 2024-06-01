@@ -8,6 +8,7 @@ https://github.com/huongtr/cdtkpm/assets/29396422/052879d0-2fbb-4796-9734-0c49f2
 ### Mobile app
 #### user app
 - update file .env
+- run app
 ```
 yarn install
 yarn ios
@@ -15,6 +16,7 @@ yarn ios
 ```
 #### driver app
 - update file .env
+- run app
 ```
 yarn install
 yarn ios
